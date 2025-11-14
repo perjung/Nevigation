@@ -1,21 +1,44 @@
 import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { useState } from 'react';
+import { StyleSheet } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import HomeScreen from './screens/HomeScreen';
+import DetailScreen from './screens/DetailScreen';
+import TimerScreen from './screens/TimerScreen';
+import TodoScreen from './screens/TodoScreen';
+
+
+
+const Stack = createNativeStackNavigator();
 
 export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
+	return (
+		<NavigationContainer>
+			<Stack.Navigator>
+				{/* 초기 화면 */}
+				<Stack.Screen
+					name="Home"
+					component={HomeScreen}
+					options={{ title: '홈' }}
+				/>
+				<Stack.Screen
+					name="Detail"
+					component={DetailScreen}
+					options={{ title: '상세' }}
+				/>
+				<Stack.Screen
+					name="Timer"
+					component={TimerScreen}
+					options={{ title: '타이머' }}
+				/>
+				<Stack.Screen
+					name="TodoList"
+					component={TodoScreen}
+					options={{ title: '할일 목록'}}
+				/>
+			</Stack.Navigator>
+		</NavigationContainer>
+	);
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
